@@ -76,7 +76,12 @@ export default class News extends Component {
                 {!this.state.loading && <div className="row">
                     {this.state.articles.map((element) => {
                         return <div className="col-md-4" key={Math.random()}>
-                            <NewsItem publishedDate={element.publishedAt.slice(0,10)} title={element.title.slice(0, 30)} description={!element.description ? "" : element.description.slice(0, 117)} imageUrl={!element.urlToImage ? "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/LRQ5T2TNUNAFLGVHT5STSHF4S4_size-normalized.jpg&w=1440" : element.urlToImage} newsUrl={element.url} />
+                            <NewsItem publishedDate={element.publishedAt.slice(0,10)} title={element.title.slice(0, 30)} 
+                            description={!element.description ? "" : element.description.slice(0, 117)} 
+                            imageUrl={!element.urlToImage ? "https://www.washingtonpost.com/wp-apps/imrs.php?src=https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/LRQ5T2TNUNAFLGVHT5STSHF4S4_size-normalized.jpg&w=1440" : element.urlToImage} 
+                            newsUrl={element.url} 
+                            author={element.author}
+                            source={element.source.name}/>
                         </div>
                     })}
                 </div>}

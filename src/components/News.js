@@ -9,7 +9,7 @@ export default class News extends Component {
         articles: [],
         loading: true,
         totalResults: 0,
-        page: 1
+        page: 1,
     };
 
     static defaultProps = {
@@ -24,7 +24,7 @@ export default class News extends Component {
 
     updateNews = async () => {
         this.props.setProgress(10);
-        const url = `https://newsapi.org/v2/top-headlines?country=us&category=${this.props.category}&apiKey=fbbb0830a1514fc69fb4bc362fb97c99&page=1&pageSize=${this.props.pageSize}`;
+        const url = `https://newsapi.org/v2/top-headlines?country=us&category=${this.props.category}&apiKey=${this.props.apiKey}&page=1&pageSize=${this.props.pageSize}`;
         this.setState({ loading: true });
         this.props.setProgress(30);
         let data = await fetch(url);
@@ -45,7 +45,7 @@ export default class News extends Component {
 
     fetchMoreData = async () => {
         this.setState({ page: this.state.page + 1 });
-        const url = `https://newsapi.org/v2/top-headlines?country=us&category=${this.props.category}&apiKey=fbbb0830a1514fc69fb4bc362fb97c99&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+        const url = `https://newsapi.org/v2/top-headlines?country=us&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
         let data = await fetch(url);
         let parsedData = await data.json();
         this.setState({
@@ -59,9 +59,9 @@ export default class News extends Component {
         return (
             <>
                 <h1 className='text-center'>NewsMonkey - Top Headlines</h1>
-                {this.state.loading && <div className="container d-flex justify-content-center vh-100">
+                {/* {this.state.loading && <div className="container d-flex justify-content-center vh-100">
                     <Spinner />
-                </div>}
+                </div>} */}
                 <InfiniteScroll
                     dataLength={this.state.articles.length}
                     next={this.fetchMoreData}

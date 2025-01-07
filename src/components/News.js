@@ -22,8 +22,25 @@ export default class News extends Component {
         pageSize: PropTypes.number
     }
 
+    updateNews = async () => {
+        this.props.setProgress(10);
+        const url = `https://newsapi.org/v2/top-headlines?country=us&category=${this.props.category}&apiKey=fbbb0830a1514fc69fb4bc362fb97c99&page=1&pageSize=${this.props.pageSize}`;
+        this.setState({ loading: true });
+        this.props.setProgress(30);
+        let data = await fetch(url);
+        this.props.setProgress(50);
+        let parsedData = await data.json();
+        this.props.setProgress(70);
+        this.setState({
+            articles: parsedData.articles,
+            totalResults: parsedData.totalResults,
+            loading: false
+        });
+        this.props.setProgress(100);
+    }
+
     async componentDidMount() {
-        this.fetchMoreData();
+        this.updateNews();
     }
 
     fetchMoreData = async () => {
